@@ -1,5 +1,16 @@
 function page() {
-  return <div>Login</div>;
+  return (
+    <section>
+      <div>
+        <h1>Login</h1>
+        <form action="">
+          <input type="text" />
+          <input type="password" />
+          <input type="submit" />
+        </form>
+      </div>
+    </section>
+  );
 }
 
 export default page;
