@@ -3,11 +3,11 @@ function page() {
     <section>
       <div>
         <h1>Register</h1>
-        <form action="">
-          <input type="text" />
-          <input type="email" />
+        <form>
+          <input type="text" placeholder="Name..." />
+          <input type="email" placeholder="Email..." />
 
-          <input type="password" />
+          <input type="password" placeholder="Password..." />
           <input type="submit" value="Register" />
         </form>
       </div>

@@ -4,9 +4,9 @@ function page() {
       <div>
         <h1>Login</h1>
         <form action="">
-          <input type="text" />
-          <input type="password" />
-          <input type="submit" />
+          <input type="text" placeholder="Name..." />
+          <input type="password" placeholder="Password..." />
+          <input type="submit" value="Login" />
         </form>
       </div>
     </section>
