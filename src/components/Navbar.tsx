@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export const Navbar = () => {
   return (
-    <header>
+    <header className="flex justify-center p-1">
       <div>Logo</div>
       <nav>
-        <ul>
+        <ul className="flex gap-3">
           <Link href="/">Home</Link>
           <Link href="/">Notes</Link>
 
-          <div>
+          <div className="">
             <h2>Name</h2>
             <Link href="/">Dashboard</Link>
             <button>New note</button>
