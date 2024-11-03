@@ -19,13 +19,17 @@ async function fetchUserNotes(): Promise<Note[]> {
 }
 function page() {
   return (
-    <section>
-      <div>
-        <h1>Login</h1>
-        <form action="">
+    <section className="flex justify-center">
+      <div className="p-3 m-3">
+        <h1 className="text-center">Login</h1>
+        <form>
           <input type="text" placeholder="Name..." />
           <input type="password" placeholder="Password..." />
-          <input type="submit" value="Login" />
+          <input
+            className="bg-green-500 px-3 py-1"
+            type="submit"
+            value="Login"
+          />
         </form>
       </div>
     </section>
