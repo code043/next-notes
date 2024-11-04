@@ -1,11 +1,11 @@
+"use client";
 type Note = {
   id: string;
   title: string;
   content: string;
 };
 async function fetchUserNotes(): Promise<Note[]> {
-  const id = 1;
-  const res = await fetch(`http://localhost:8080/api/users/`, {
+  const res = await fetch(`http://localhost:8080/register/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,12 +20,15 @@ async function fetchUserNotes(): Promise<Note[]> {
   return res.json();
 }
 function page() {
+  async function getNote(formData: FormData) {
+    await fetchUserNotes();
+  }
   return (
     <section className="flex justify-center">
       <div className="p-4 m-4">
         <h1 className="text-center">Register</h1>
-        <form className="p-4">
-          <input type="text" placeholder="Name..." />
+        <form action={getNote} className="flex flex-col justify-center p-4">
+          <input name="name" type="text" placeholder="Name..." />
           <input type="email" placeholder="Email..." />
 
           <input type="password" placeholder="Password..." />
