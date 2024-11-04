@@ -4,6 +4,7 @@ type Note = {
   content: string;
 };
 async function fetchUserNotes(): Promise<Note[]> {
+  "user server";
   const res = await fetch(`http://localhost:8080/api/users/`, {
     method: "POST",
     headers: {
@@ -18,6 +19,7 @@ async function fetchUserNotes(): Promise<Note[]> {
   return res.json();
 }
 function page() {
+  fetchUserNotes();
   return (
     <section className="flex justify-center">
       <div className="p-3 m-3">
