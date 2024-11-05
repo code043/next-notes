@@ -1,5 +1,5 @@
 "use client";
-import { fetchNote } from "@/actions/fetchNote";
+import { getNoteById } from "@/actions/getNoteById";
 import { Note } from "@/types/Note";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -9,7 +9,7 @@ function NoteByID() {
   const { id } = useParams();
   const [note, setNote] = useState<Note | null>(null);
   async function noteById() {
-    const noteById: Note = await fetchNote(id);
+    const noteById: Note = await getNoteById(id);
     setNote(noteById);
   }
   useEffect(() => {

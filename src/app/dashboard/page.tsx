@@ -1,34 +1,26 @@
-type Note = {
-  id: string;
-  title: string;
-  content: string;
-};
-async function fetchUserNotes(): Promise<Note[]> {
-  const id = 1;
-  const res = await fetch(`http://localhost:8080/api/users/${id}`);
+import { createNote } from "@/actions/createNote";
+import { getUserNotes } from "@/actions/getUserNotes";
+import { Note } from "@/types/Note";
+import { useEffect, useState } from "react";
 
-  return res.json();
-}
-
-async function createNote(): Promise<void> {
-  await fetch(`http://localhost:8080/register/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: "Nextjs",
-      content: "Learn Nextjs...",
-    }),
-  });
-}
 export default async function page() {
-  const data = await fetchUserNotes();
+  const [notes, setNotes] = useState<Note | null>(null);
+
+  async function create() {
+    await createNote();
+  }
+  async function getNotes() {
+    const data: Note | null = await getUserNotes();
+    setNotes(data);
+  }
+  useEffect(() => {
+    getNotes();
+  }, []);
   return (
     <section>
       <div className="flex justify-center">
         <form
-          action={createNote}
+          action={create}
           id="note-form"
           className="flex flex-col gap-2 w-[350px] p-10 m-4 bg-blue-200 border border-radius"
         >
@@ -54,7 +46,7 @@ export default async function page() {
       </div>
       <div>
         <ul>
-          {data.map((note: Note) => {
+          {/* {note.map((note: Note) => {
             return (
               <li>
                 <div>
@@ -66,7 +58,7 @@ export default async function page() {
                 </div>
               </li>
             );
-          })}
+          })} */}
         </ul>
       </div>
     </section>

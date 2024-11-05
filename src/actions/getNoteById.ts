@@ -1,7 +1,7 @@
 "use server";
 import { Note } from "@/types/Note";
 
-export async function fetchNote(
+export async function getNoteById(
   id: string | string[] | undefined
 ): Promise<Note> {
   "use server";

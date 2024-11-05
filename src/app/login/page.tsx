@@ -1,25 +1,7 @@
-type Note = {
-  id: string;
-  title: string;
-  content: string;
-};
-async function fetchUserNotes(): Promise<Note[]> {
-  "user server";
-  const res = await fetch(`http://localhost:8080/api/users/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: "email@gmail.com",
-      password: "123",
-    }),
-  });
+import { login } from "@/actions/login";
 
-  return res.json();
-}
 function page() {
-  fetchUserNotes();
+  login();
   return (
     <section className="flex justify-center">
       <div className="p-3 m-3">

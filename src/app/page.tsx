@@ -1,19 +1,8 @@
+import { getAllNotes } from "@/actions/getAllNotes";
 import Link from "next/link";
 
-type Note = {
-  id: number;
-  title: string;
-  content: string;
-};
-async function fetchNotes(): Promise<Note[]> {
-  "use server";
-  const res = await fetch(`http://localhost:8080/notes`);
-  const data = await res.json();
-  console.log(data);
-  return data.notes;
-}
 export default async function Home() {
-  const notes = await fetchNotes();
+  const notes = await getAllNotes();
   return (
     <section>
       <h1>Notes</h1>
