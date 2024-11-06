@@ -6,8 +6,25 @@ import { useEffect, useState } from "react";
 export default async function page() {
   const [notes, setNotes] = useState<Note | null>(null);
 
-  async function create() {
-    await createNote();
+  async function create(formData: FormData) {
+    const token: string | null = localStorage.getItem("user-notes");
+    token?.split(".")[1];
+    console.log(token);
+    let userData: string = "";
+    if (token) {
+      userData = atob(token);
+    }
+
+    console.log("decode: ", JSON.parse(userData));
+    const { userId } = JSON.parse(userData);
+    console.log(userId);
+
+    const note = {
+      title: formData.get("title") as string | null,
+      content: formData.get("content") as string | null,
+      userId: userId as string | null,
+    };
+    await createNote(note);
   }
   async function getNotes() {
     const data: Note | null = await getUserNotes();

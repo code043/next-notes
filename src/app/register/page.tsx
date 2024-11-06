@@ -5,7 +5,6 @@ import { createUser } from "@/actions/createUser";
 function page() {
   async function getNote(formData: FormData) {
     const data = await createUser(formData);
-    console.log("Register: ", data.token);
     localStorage.setItem("user-notes", data.token);
   }
   return (
