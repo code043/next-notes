@@ -1,6 +1,7 @@
 import { Note } from "@/types/Note";
+import { RegisterResponse } from "@/types/User";
 
-export async function createUser(): Promise<Note[]> {
+export async function createUser(): Promise<RegisterResponse> {
   const res = await fetch(`http://localhost:8080/register/`, {
     method: "POST",
     headers: {
@@ -13,5 +14,7 @@ export async function createUser(): Promise<Note[]> {
     }),
   });
 
-  return res.json();
+  const data = await res.json();
+  //console.log(data);
+  return data;
 }

@@ -4,7 +4,9 @@ import { createUser } from "@/actions/createUser";
 
 function page() {
   async function getNote(formData: FormData) {
-    await createUser();
+    const data = await createUser();
+    console.log("Register: ", data.token);
+    localStorage.setItem("user-notes", data.token);
   }
   return (
     <section className="flex justify-center">
