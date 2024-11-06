@@ -4,7 +4,7 @@ import { createUser } from "@/actions/createUser";
 
 function page() {
   async function getNote(formData: FormData) {
-    const data = await createUser();
+    const data = await createUser(formData);
     console.log("Register: ", data.token);
     localStorage.setItem("user-notes", data.token);
   }
@@ -14,9 +14,9 @@ function page() {
         <h1 className="text-center">Register</h1>
         <form action={getNote} className="flex flex-col justify-center p-4">
           <input name="name" type="text" placeholder="Name..." />
-          <input type="email" placeholder="Email..." />
+          <input name="email" type="email" placeholder="Email..." />
 
-          <input type="password" placeholder="Password..." />
+          <input name="password" type="password" placeholder="Password..." />
           <input
             className="bg-pink-500 px-4 py-1"
             type="submit"
