@@ -5,7 +5,7 @@ import { Note } from "@/types/Note";
 import { useEffect, useState } from "react";
 
 export default function page() {
-  const [notes, setNotes] = useState<Note | null>(null);
+  const [notes, setNotes] = useState<Note[] | null>(null);
 
   async function create(formData: FormData) {
     const token: string | null = localStorage.getItem("user-notes");
@@ -18,7 +18,8 @@ export default function page() {
     await createNote(note);
   }
   async function getNotes() {
-    const data: Note | null = await getUserNotes();
+    const data: Note[] | null = await getUserNotes();
+    console.log("notas user: ", data);
     setNotes(data);
   }
   useEffect(() => {
@@ -54,19 +55,20 @@ export default function page() {
       </div>
       <div>
         <ul>
-          {/* {note.map((note: Note) => {
-            return (
-              <li>
-                <div>
-                  <h1>Note: {note.id}</h1>
+          {notes &&
+            notes.map((note: Note) => {
+              return (
+                <li key={note.id}>
                   <div>
-                    <h2>{note.title}</h2>
-                    <div>{note.content}</div>
+                    <h1>Note: {note.id}</h1>
+                    <div>
+                      <h2>{note.title}</h2>
+                      <div>{note.content}</div>
+                    </div>
                   </div>
-                </div>
-              </li>
-            );
-          })} */}
+                </li>
+              );
+            })}
         </ul>
       </div>
     </section>
