@@ -1,4 +1,3 @@
-import { Note } from "@/types/Note";
 import { RegisterResponse } from "@/types/User";
 
 export async function createUser(
