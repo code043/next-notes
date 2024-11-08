@@ -1,10 +1,24 @@
 "use client";
 import { createNote } from "@/actions/createNote";
 import { getUserNotes } from "@/actions/getUserNotes";
+import { useUser } from "@/context/user-context";
 import { Note } from "@/types/Note";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function page() {
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const { user } = useUser();
+  useEffect(() => {
+    if (user === null) {
+      setLoading(true);
+      router.push("/login");
+    } else {
+      setLoading(false);
+      router.push("/dashboard");
+    }
+  }, [user, router]);
   const [notes, setNotes] = useState<Note[] | null>(null);
 
   async function create(formData: FormData) {
@@ -23,8 +37,15 @@ export default function page() {
     setNotes(data);
   }
   useEffect(() => {
+    // permission();
+  }, []);
+  useEffect(() => {
     getNotes();
   }, []);
+  if (loading) {
+    // Exibe uma tela de carregamento enquanto o estado do usuário é verificado
+    return <div>Carregando...</div>;
+  }
   return (
     <section>
       <div className="flex justify-center">

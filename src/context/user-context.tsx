@@ -1,19 +1,17 @@
-// src/context/UserContext.tsx
 "use client";
 
 import { getUserById } from "@/actions/getUserById";
-import React, { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
+
 type User = { id: string; name: string; email: string };
-// Tipagem do contexto
+
 export type IUserContext = {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
-// Crie o contexto
 export const UserContext = createContext<IUserContext | null>(null);
 
-// Hook para acessar o contexto do usuário
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
@@ -22,7 +20,6 @@ export const useUser = () => {
   return context;
 };
 
-// Provedor de contexto para fornecer o valor `user` e `setUser`
 export function UserContextProvider({
   children,
 }: {
@@ -31,12 +28,18 @@ export function UserContextProvider({
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("user-notes");
-    if (token) {
-      getUserById(token).then((userData) => {
-        setUser(userData);
-      });
-    }
+    const fetchUser = async () => {
+      const token = localStorage.getItem("user-notes");
+      if (token) {
+        try {
+          const userData = await getUserById(token);
+          setUser(userData);
+        } catch (error) {
+          console.error("Erro ao buscar dados do usuário:", error);
+        }
+      }
+    };
+    fetchUser();
   }, []);
 
   return (
