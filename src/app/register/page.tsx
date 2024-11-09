@@ -1,11 +1,15 @@
 "use client";
 
 import { createUser } from "@/actions/createUser";
+import { useRouter } from "next/navigation";
 
 function page() {
+  const router = useRouter();
   async function getNote(formData: FormData) {
     const data = await createUser(formData);
     localStorage.setItem("user-notes", data.token);
+    window.location.reload();
+    router.push("/dashboard");
   }
   return (
     <section className="flex justify-center">
