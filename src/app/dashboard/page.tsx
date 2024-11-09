@@ -18,7 +18,7 @@ export default function page() {
       setLoading(false);
       router.push("/dashboard");
     }
-  }, [user, router]);
+  }, [user]);
   const [notes, setNotes] = useState<Note[] | null>(null);
 
   async function create(formData: FormData) {
@@ -36,9 +36,7 @@ export default function page() {
     console.log("notas user: ", data);
     setNotes(data);
   }
-  useEffect(() => {
-    // permission();
-  }, []);
+
   useEffect(() => {
     getNotes();
   }, []);

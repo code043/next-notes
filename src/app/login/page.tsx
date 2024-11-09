@@ -1,7 +1,9 @@
 "use client";
 import { login } from "@/actions/login";
+import { useRouter } from "next/navigation";
 
 function page() {
+  const router = useRouter();
   async function startSession(formData: FormData) {
     const user = {
       email: formData.get("email") as string | null,
@@ -11,6 +13,9 @@ function page() {
     console.log("resposta login ", response.token);
     const token = response.token;
     localStorage.setItem("user-notes", token);
+    if (localStorage.getItem("user-notes")) {
+      router.push("/dashboard");
+    }
   }
 
   return (
