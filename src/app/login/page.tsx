@@ -1,5 +1,6 @@
 "use client";
 import { login } from "@/actions/login";
+import { useUser } from "@/context/user-context";
 import { useRouter } from "next/navigation";
 
 function page() {
@@ -13,9 +14,8 @@ function page() {
     console.log("resposta login ", response.token);
     const token = response.token;
     localStorage.setItem("user-notes", token);
-    if (localStorage.getItem("user-notes")) {
-      router.push("/dashboard");
-    }
+    window.location.reload();
+    router.push("/dashboard");
   }
 
   return (
